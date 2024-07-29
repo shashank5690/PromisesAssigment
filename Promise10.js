@@ -7,7 +7,7 @@ function conditionalChaining(initialUrl, secondaryUrl1, secondaryUrl2) {
             return response.json();
         })
         .then(data => {
-            // Example condition: fetch the second URL if data meets some condition
+            
             const shouldFetchSecondary1 = data.someCondition; // Replace with actual condition
 
             const secondaryUrlToFetch = shouldFetchSecondary1 ? secondaryUrl1 : secondaryUrl2;
@@ -26,7 +26,7 @@ function conditionalChaining(initialUrl, secondaryUrl1, secondaryUrl2) {
         });
 }
 
-// Example usage
+
 const initialUrl = 'https://api.example.com/initial';
 const secondaryUrl1 = 'https://api.example.com/secondary1';
 const secondaryUrl2 = 'https://api.example.com/secondary2';
