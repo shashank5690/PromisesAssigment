@@ -1,25 +1,27 @@
+
 console.log("Program started");
 
-const myPromise = new Promise((resolve, reject) => {
-    console.log("Promise is pending...");
-    
-    setTimeout(() => {
-        reject("Promise rejected!");
-    }, 2000);
+const firstPromise  = new Promise((resolve,reject) => {
+    console.log("Pending")
 
     setTimeout(() => {
-        resolve("Promise resolved!");
-    }, 3000);
+        reject("rejcted")
+    },6000);
+
+    setTimeout(() => {
+        resolve("resolved")
+    },3000);
 });
 
-console.log("Program in progress...");
+console.log("In progress")  
+// promise is reject after 6sec so catch will be excuted
+firstPromise
+   .then((value)=>{
+    console.log(value)
+    console.log("Program complete")
+   })
 
-myPromise
-    .then((message) => {
-        console.log(message);
-        console.log("Program complete");
-    })
-    .catch((error) => {
-        console.log(error);
-        console.log("Program failure");
-    });
+   .catch((error)=>{
+    console.log(error)
+    console.log("Program failure")
+   });

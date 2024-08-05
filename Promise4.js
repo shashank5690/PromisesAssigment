@@ -1,39 +1,28 @@
-function fetchWithRetry(url, retries) {
-    return new Promise((resolve, reject) => {
-        // function to handle retries
-        const attemptFetch = (attemptsLeft) => {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    resolve(data);
-                })
-                .catch(error => {
-                    if (attemptsLeft <= 0) {
-                        reject(`Failed after ${retries} retries: ${error.message}`);
-                    } else {
-                        console.log(`Retrying... Attempts left: ${attemptsLeft}`);
-                        attemptFetch(attemptsLeft - 1);
-                    }
-                });
-        };
+function fetchWithRetry(url, maxTries) {
+    return new Promise(async (resolve, reject) => {
+        console.log("Fetching data from URL:", url);
+        // let attempt = 1;
 
-        // first attempt
-        attemptFetch(retries);
+        for(let i=1;i<=maxTries;i++) {
+            console.log("Try number:", i);
+            try {
+                const response = await fetch(url)
+                const data = await response.json();
+                return resolve(data);
+            } catch (error) {
+                   console.log(`Data not fetched after ${i}  attempts.`);
+            }
+        }
+        reject('Data not fetched after multiple attempts.');
     });
 }
 
-
-const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=22.5411&longitude=88.3378&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=1';
-
-fetchWithRetry(apiUrl, 3)
-    .then(data => {
-        console.log('Data fetched successfully:', data);
+const url = 'https://jsonpla4432ceholder.typicode.com/posts';
+const url2 = 'https://jsonplaceholder.typicode.com/posts1';
+fetchWithRetry(url, 3)
+    .then((data) => {
+        console.log(data);
     })
-    .catch(error => {
-        console.error('Error fetching data:', error);
+    .catch((error) => {
+        console.log(error);
     });

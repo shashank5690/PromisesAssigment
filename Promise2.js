@@ -1,24 +1,26 @@
-console.log("Program started");
 
-const firstPromise = new Promise((resolve) => {
-    console.log("Promise is pending...");
-    
+console.log("Program started");
+const firstpromise = new Promise((resolve) => {
+    console.log("Promise  abhi pending hai");
     setTimeout(() => {
-        resolve("Step 1 complete");
-    }, 3000);
+        resolve("step 1 done")
+    },3000);
 });
 
-console.log("Program in progress...");
+console.log ("Program is in progrss");
 
-firstPromise
-    .then((message) => {
-        console.log(message);
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve("Step 2 Complete");
-            }, 3000);
-        });
+firstpromise
+ .then((value) => {
+    console.log(value);
+    return new Promise((resolve)=> {
+        setTimeout(() => {
+            resolve("Step 2 done")
+        },3000)
     })
-    .then((message) => {
-        console.log(message);
-    });
+ })
+ .then((value) => {
+     console.log(value);
+ })
+ .catch((value) => {
+    console.log(value);
+ })
