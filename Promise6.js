@@ -1,23 +1,27 @@
 function fetchAllWithErrors(urls) {
+    // const res = [];
     return Promise.all(
-         urls.map(async url => {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    console.log("response.status =", response.status);
+         urls.map(url => 
+            fetch(url)
+            .then( response => {
+                // const response = await fetch(url);
+                if(!response.ok){
+                    console.log("Error fetching data:",response)
                 }
                 return response;
-            }
-            catch (error) {
-                return Promise.reject(error);
-            }
-     })
-    );
+            })
+            .catch (error =>{
+                // console.log("Error fetching data:",error)
+                //reject with error
+                return Promise.reject(error);   
+          })
+    )
+);
 }
 
 const urls = [
-    'https://api.open-meteo.com/v1/forecast?latitude=22.5411&longitude=88.3378&dmperat',
-    'https://fakestoreapi.c'
+    'https://api.op55en-meteo.com/v1/forecast?latitude=22.5411&longitude=88.3378&dmperat',
+    'https://fakesto555reapi.c'
 ];
 
 fetchAllWithErrors(urls)
@@ -25,5 +29,5 @@ fetchAllWithErrors(urls)
         console.log('data fetched successfully:', results);
     })
     .catch(error => {
-        console.error('error fetching data:', error);
+        console.error('Error fetching data:', error);
     });

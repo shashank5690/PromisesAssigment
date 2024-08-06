@@ -8,7 +8,7 @@ function fetchWithRetry(url, maxTries) {
             try {
                 const response = await fetch(url)
                 const data = await response.json();
-                return resolve(data);
+                 resolve(data);
             } catch (error) {
                    console.log(`Data not fetched after ${i}  attempts.`);
             }
@@ -17,8 +17,7 @@ function fetchWithRetry(url, maxTries) {
     });
 }
 
-const url = 'https://jsonpla4432ceholder.typicode.com/posts';
-const url2 = 'https://jsonplaceholder.typicode.com/posts1';
+const url = 'https://jsonpl64647aceholder.typicode.com/posts';
 fetchWithRetry(url, 3)
     .then((data) => {
         console.log(data);
